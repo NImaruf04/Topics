@@ -1,0 +1,47 @@
+// اعوذ بالله من الشيطان الرجيم
+//  'بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+
+// Date:   2025.02.03
+// Time:   19:07:49
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define float double
+#define ccase cout << "Case" << " " << T << " " << ':' << " "
+#define cyes cout << "YES" << endl
+#define cno cout << "NO" << endl
+#define endl '\n'
+#define NI                       \
+    ios::sync_with_stdio(false); \
+    cin.tie(NULL);               \
+    cout.tie(NULL);
+
+#define MARUF  \
+    int TC;    \
+    cin >> TC; \
+    for (int T = 1; T <= TC; T++)
+void solve();
+int32_t main()
+{
+    NI MARUF
+    {
+        solve();
+    }
+    return 0;
+}
+void solve()
+{
+    int n, a, b, c, d;
+    cin >> n >> a >> b >> c >> d;
+    int res = 0;
+    for (int i = 0; pow(n, i) <= d; i++)
+    {
+        int x = pow(n, i);
+        int rf = (c + x - 1) / x, rr = d / x;
+        int lf, lr;
+        lf = max(a, rf), lr = min(b, rr);
+        if (lf <= lr)
+            res += lr - lf + 1;
+    }
+    cout << res << endl;
+}
