@@ -1,0 +1,64 @@
+// اعوذ بالله من الشيطان الرجيم
+//  'بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+ 
+// Date:   2025.03.02
+// Time:   22:56:40
+#include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+// template <typename T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; // for set
+template <typename T> using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>; // for multiset
+#define int long long
+#define float double
+#define cyes cout<<"YES"<<endl
+#define cno cout<<"NO"<<endl
+#define endl '\n'
+#define NI                       \
+    ios::sync_with_stdio(false);  \
+    cin.tie(NULL);                 \
+    cout.tie(NULL);                 \
+    void solve();
+int32_t main()
+{
+    NI
+    solve();
+    return 0;
+}
+void solve()
+{
+    int n;cin>>n;
+    string s;
+    cin>>s;
+    string r=s;
+    reverse(r.begin(),r.end());
+    map<char,queue<int>>pos_s,pos_r;
+    for(int i=0;i<n;i++){
+        pos_s[s[i]].push(i);
+        pos_r[r[i]].push(i);
+    }
+    // map<char,vector<int>>pos_s,pos_r;
+    // for(int i=0;i<n;i++){
+    //     pos_s[s[i]].push_back(i);
+    //     pos_r[r[i]].push_back(i);
+    // }
+    vector<int>permutation(n);
+    for(int i=0;i<n;i++){
+        permutation[i]=pos_s[r[i]].front();
+        pos_s[r[i]].pop();
+    }
+    // for(char ch='a';ch<='z';ch++){
+    // for(int i=0;i<pos_s[ch].size();i++){
+    //    permutation[pos_r[ch][i]]=pos_s[ch][i];
+    // }}
+    // for(auto xx:permutation)cout<<xx<<" ";
+    // cout<<endl;
+    pbds<int>p;
+    int res=0;
+    for(int i=n-1;i>=0;i--){
+      p.insert(permutation[i]);
+      res+=p.order_of_key(permutation[i]);
+    }
+    cout<<res<<endl;
+}
